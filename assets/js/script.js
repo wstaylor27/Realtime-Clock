@@ -1,28 +1,27 @@
-const showTime = () => {
-  let date = new Date();
-  let h = date.getHours();
-  let m = date.getMinutes();
-  let s = date.getSeconds();
-  let session = "AM";
+setInterval(showTime, 1000);
+function showTime() {
+  let time = new Date();
+  let hour = time.getHours();
+  let min = time.getMinutes();
+  let sec = time.getSeconds();
+  am_pm = "AM";
 
-  if (h == 0) {
-    h = 12;
+  if (hour > 12) {
+    hour -= 12;
+    am_pm = "PM";
   }
-  if (h > 12) {
-    h = h - 12;
-    session = "PM";
+  if (hour == 0) {
+    hr = 12;
+    am_pm = "AM";
   }
 
-  // Adding zeroes to the beginning of an integer if argument is true. This will also convert the integer to a string if true.
-  h = h < 10 ? "0" + h : h;
-  m = m < 10 ? "0" + m : m;
-  s = s < 10 ? "0" + s : s;
+  hour = hour < 10 ? "0" + hour : hour;
+  min = min < 10 ? "0" + min : min;
+  sec = sec < 10 ? "0" + sec : sec;
 
-  let time = h + ":" + m + ":" + s + " " + session;
-  document.getElementById("clockDisplay").innerText = time;
-  document.getElementById("clockDisplay").textContent = time;
+  let currentTime = hour + ":" + min + ":" + sec + am_pm;
 
-  setTimeout(showTime, 1000);
-};
+  document.getElementById("clock").innerHTML = currentTime;
+}
 
 showTime();
